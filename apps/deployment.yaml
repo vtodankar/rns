@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rns
+spec:
+  replicas: 3
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: rns
+  template:
+    metadata:
+      labels:
+        app: rns
+    spec:
+      containers:
+      - image: 992382794861.dkr.ecr.ap-southeast-2.amazonaws.com/rns:latest
+        name: rns
+        ports:
+        - containerPort: 8095
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "250m"
+        readinessProbe:
+          httpGet:
+            path: /RoadNameWS/getAllLGAs
+            port: 8095
+          initialDelaySeconds: 120
+          periodSeconds: 60
