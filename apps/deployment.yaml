@@ -14,7 +14,7 @@ spec:
         app: rns
     spec:
       containers:
-      - image: 992382794861.dkr.ecr.ap-southeast-2.amazonaws.com/rns:latest
+      - image: 324898396996.dkr.ecr.ap-southeast-2.amazonaws.com/rns:3.0.0
         name: rns
         ports:
         - containerPort: 8095
@@ -27,7 +27,7 @@ spec:
             cpu: "250m"
         readinessProbe:
           httpGet:
-            path: /RoadNameWS/getAllLGAs
+            path: /actuator/health
             port: 8095
           initialDelaySeconds: 120
           periodSeconds: 60
